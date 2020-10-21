@@ -1,5 +1,5 @@
 <template>
-<el-container v-loading="loading">
+<el-container>
     <el-row align="middle">
         <el-col :span="12">
             <button @click="prevPage" :disabled="pagina == 1">Anterior</button>
@@ -23,8 +23,7 @@ export default {
     data() {
         return {
             personajes: [],
-            pagina: 1,
-            loading: false,
+            pagina: 1
         };
     },
     created() {
@@ -32,12 +31,11 @@ export default {
     },
     methods: {
         llamadoApi() {
-            this.loading = true;
+
             fetch(this.url)
                 .then((res) => res.json())
                 .then((data) => (this.personajes = data.results));
 
-            this.loading = false;
         },
         nextPage() {
             this.pagina++;
