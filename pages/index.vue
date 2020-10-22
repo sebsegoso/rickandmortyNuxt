@@ -1,12 +1,9 @@
 <template>
-<el-container>
+<el-container v-loading="loading" element-loading-text="Cargando..." element-loading-spinner="el-icon-loading" element-loading-background="#495057">
     <transition name="el-fade-in">
-        <Loading v-if="loading" />
-        <el-row v-else align="middle">
-
-            <el-pagination class="pag" layout="prev, pager, next" :total="totalPaginas" @prev-click="prevPage" @next-click="nextPage" :current-page="pagina" @current-change="clickPagina">
+        <el-row align="middle">
+            <el-pagination class="pag" :hide-on-single-page="true" layout="prev, pager, next" :total="totalPaginas" @prev-click="prevPage" @next-click="nextPage" :current-page="pagina" @current-change="clickPagina">
             </el-pagination>
-
             <Card v-for="personaje in personajes" :key="personaje.id" :id="personaje.id" :nombre="personaje.name" :imagen="personaje.image" />
         </el-row>
     </transition>
@@ -20,7 +17,7 @@ export default {
             personajes: [],
             pagina: 1,
             loading: true,
-            totalPaginas: ''
+            totalPaginas: 0,
         };
     },
     created() {
@@ -29,11 +26,12 @@ export default {
     methods: {
         llamadoApi() {
             this.loading = true;
+
             fetch(this.url)
                 .then((res) => res.json())
                 .then((data) => {
-                    this.personajes = data.results
-                    this.totalPaginas = (data.info.pages) * 10
+                    this.personajes = data.results;
+                    this.totalPaginas = data.info.pages * 10;
                 })
                 .then(() => (this.loading = false));
         },
@@ -46,9 +44,9 @@ export default {
             this.llamadoApi();
         },
         clickPagina(pag) {
-            this.pagina = pag
-            this.llamadoApi()
-        }
+            this.pagina = pag;
+            this.llamadoApi();
+        },
     },
     computed: {
         url() {
@@ -59,5 +57,4 @@ export default {
 </script>
 
 <style>
-
 </style>

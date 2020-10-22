@@ -3,9 +3,7 @@
     <el-aside width="auto">
         <Navbar />
     </el-aside>
-    <el-container>
-        <Nuxt />
-    </el-container>
+    <Nuxt />
 </el-container>
 </template>
 
