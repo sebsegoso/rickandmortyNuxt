@@ -1,6 +1,7 @@
 <template>
 <el-container>
-    <el-row align="middle">
+    <Loading v-if="loading" />
+    <el-row v-else align="middle">
         <el-col :span="12">
             <button @click="prevPage" :disabled="pagina == 1">Anterior</button>
         </el-col>
@@ -16,14 +17,17 @@
 
 <script>
 import Card from "../components/Card";
+import Loading from "../components/Loading";
 export default {
     components: {
         Card,
+        Loading
     },
     data() {
         return {
             personajes: [],
-            pagina: 1
+            pagina: 1,
+            loading: true,
         };
     },
     created() {
@@ -31,11 +35,11 @@ export default {
     },
     methods: {
         llamadoApi() {
-
+            this.loading = true;
             fetch(this.url)
                 .then((res) => res.json())
-                .then((data) => (this.personajes = data.results));
-
+                .then((data) => (this.personajes = data.results))
+                .then(() => this.loading = false);
         },
         nextPage() {
             this.pagina++;

@@ -31,7 +31,7 @@ export default {
 }
 
 .card {
-    min-height: 315px;
+    min-height: 340px;
 }
 
 .card:hover {

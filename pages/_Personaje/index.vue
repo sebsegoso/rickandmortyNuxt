@@ -1,12 +1,13 @@
 <template>
 <div class="personaje-wrapper">
-    <div class="personaje-data">
+    <Loading v-if="loading" />
+    <div v-else class="personaje-data">
         <img :src="data.image" alt="" />
         <h1>{{ data.id }} - {{ data.name }}</h1>
         <hr />
         <p>Species: {{ data.species }}</p>
         <p>Gender: {{ data.gender }}</p>
-        <p>Origin: {{data.origin.name}}</p>
+        <p>Origin: {{ data.origin.name }}</p>
     </div>
 </div>
 </template>
@@ -16,14 +17,15 @@ export default {
     name: "Card",
     data() {
         return {
+            loading: true,
             data: {
-                id: '',
-                name: '',
-                species: '',
-                gender: '',
+                id: "",
+                name: "",
+                species: "",
+                gender: "",
                 origin: {
-                    name: ''
-                }
+                    name: "",
+                },
             },
         };
     },
@@ -32,9 +34,11 @@ export default {
     },
     methods: {
         llamadoApi() {
+            this.loading = true;
             fetch(this.urlPersonaje)
                 .then((res) => res.json())
-                .then((data) => (this.data = data));
+                .then((data) => (this.data = data))
+                .then(() => (this.loading = false));
         },
     },
     computed: {
@@ -44,9 +48,9 @@ export default {
     },
     head() {
         return {
-            title: `${this.data.name} | Rick & Morty personajes`
-        }
-    }
+            title: `${this.data.name} | Rick & Morty personajes`,
+        };
+    },
 };
 </script>
 
