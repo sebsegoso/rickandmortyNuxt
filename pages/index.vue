@@ -1,64 +1,63 @@
 <template>
-  <el-container>
+<el-container>
     <transition name="el-fade-in">
-      <Loading v-if="loading" />
-      <el-row v-else align="middle">
-        <el-col :span="12">
-          <button @click="prevPage" :disabled="pagina == 1">Anterior</button>
-        </el-col>
+        <Loading v-if="loading" />
+        <el-row v-else align="middle">
 
-        <el-col :span="12">
-          <button @click="nextPage" :disabled="pagina == 34">Siguiente</button>
-        </el-col>
+            <el-pagination class="pag" layout="prev, pager, next" :total="totalPaginas" @prev-click="prevPage" @next-click="nextPage" :current-page="pagina" @current-change="clickPagina">
+            </el-pagination>
 
-        <Card
-          v-for="personaje in personajes"
-          :key="personaje.id"
-          :id="personaje.id"
-          :nombre="personaje.name"
-          :imagen="personaje.image"
-        />
-      </el-row>
+            <Card v-for="personaje in personajes" :key="personaje.id" :id="personaje.id" :nombre="personaje.name" :imagen="personaje.image" />
+        </el-row>
     </transition>
-  </el-container>
+</el-container>
 </template>
 
 <script>
 export default {
-  data() {
-    return {
-      personajes: [],
-      pagina: 1,
-      loading: true,
-    };
-  },
-  created() {
-    this.llamadoApi();
-  },
-  methods: {
-    llamadoApi() {
-      this.loading = true;
-      fetch(this.url)
-        .then((res) => res.json())
-        .then((data) => (this.personajes = data.results))
-        .then(() => (this.loading = false));
+    data() {
+        return {
+            personajes: [],
+            pagina: 1,
+            loading: true,
+            totalPaginas: ''
+        };
     },
-    nextPage() {
-      this.pagina++;
-      this.llamadoApi();
+    created() {
+        this.llamadoApi();
     },
-    prevPage() {
-      this.pagina--;
-      this.llamadoApi();
+    methods: {
+        llamadoApi() {
+            this.loading = true;
+            fetch(this.url)
+                .then((res) => res.json())
+                .then((data) => {
+                    this.personajes = data.results
+                    this.totalPaginas = (data.info.pages) * 10
+                })
+                .then(() => (this.loading = false));
+        },
+        nextPage() {
+            this.pagina++;
+            this.llamadoApi();
+        },
+        prevPage() {
+            this.pagina--;
+            this.llamadoApi();
+        },
+        clickPagina(pag) {
+            this.pagina = pag
+            this.llamadoApi()
+        }
     },
-  },
-  computed: {
-    url() {
-      return `https://rickandmortyapi.com/api/character?page=${this.pagina}`;
+    computed: {
+        url() {
+            return `https://rickandmortyapi.com/api/character?page=${this.pagina}`;
+        },
     },
-  },
 };
 </script>
 
 <style>
+
 </style>
