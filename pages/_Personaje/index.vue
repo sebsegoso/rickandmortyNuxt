@@ -1,14 +1,16 @@
 <template>
 <div class="personaje-wrapper">
-    <Loading v-if="loading" />
-    <div v-else class="personaje-data">
-        <img :src="data.image" alt="" />
-        <h1>{{ data.id }} - {{ data.name }}</h1>
-        <hr />
-        <p>Species: {{ data.species }}</p>
-        <p>Gender: {{ data.gender }}</p>
-        <p>Origin: {{ data.origin.name }}</p>
-    </div>
+    <transition name="el-fade-in">
+        <Loading v-if="loading" />
+        <div v-else class="personaje-data">
+            <img :src="data.image" alt="" />
+            <h1>{{ data.id }} - {{ data.name }}</h1>
+            <hr />
+            <p>Species: {{ data.species }}</p>
+            <p>Gender: {{ data.gender }}</p>
+            <p>Origin: {{ data.origin.name }}</p>
+        </div>
+    </transition>
 </div>
 </template>
 
@@ -56,6 +58,7 @@ export default {
 
 <style>
 .personaje-wrapper {
+    max-width: 100vw;
     min-height: 100vh;
     padding: 3rem;
 }

@@ -1,23 +1,23 @@
 <template>
 <el-container>
-    <Loading v-if="loading" />
-    <el-row v-else align="middle">
-        <el-col :span="12">
-            <button @click="prevPage" :disabled="pagina == 1">Anterior</button>
-        </el-col>
+    <transition name="el-fade-in">
+        <Loading v-if="loading" />
+        <el-row v-else align="middle">
+            <el-col :span="12">
+                <button @click="prevPage" :disabled="pagina == 1">Anterior</button>
+            </el-col>
 
-        <el-col :span="12">
-            <button @click="nextPage" :disabled="pagina == 34">Siguiente</button>
-        </el-col>
+            <el-col :span="12">
+                <button @click="nextPage" :disabled="pagina == 34">Siguiente</button>
+            </el-col>
 
-        <Card v-for="personaje in personajes" :key="personaje.id" :id="personaje.id" :nombre="personaje.name" :imagen="personaje.image" />
-    </el-row>
+            <Card v-for="personaje in personajes" :key="personaje.id" :id="personaje.id" :nombre="personaje.name" :imagen="personaje.image" />
+        </el-row>
+    </transition>
 </el-container>
 </template>
 
 <script>
-import Card from "../components/Card";
-import Loading from "../components/Loading";
 export default {
     components: {
         Card,
