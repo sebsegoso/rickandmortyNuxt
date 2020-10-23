@@ -1,7 +1,7 @@
 <template>
 <div class="personaje-wrapper" v-loading="loading" element-loading-text="Cargando..." element-loading-spinner="el-icon-loading" element-loading-background="#495057">
     <transition name="el-fade-in">
-        <div class="personaje-data">
+        <div class="personaje__data">
             <img :src="data.image" alt="character image" class="personaje__data__img" />
             <div class="personaje__data__info">
                 <h1>{{ data.id }} - {{ data.name }}</h1>
@@ -9,6 +9,7 @@
                 <p>Species: {{ data.species }}</p>
                 <p>Gender: {{ data.gender }}</p>
                 <p>Origin: {{ data.origin.name }}</p>
+                <p>Status: {{ data.status}}</p>
             </div>
         </div>
     </transition>
@@ -64,10 +65,15 @@ export default {
     padding: 3rem;
 }
 
-.personaje-data {
+.personaje__data {
     border: 2px solid whitesmoke;
     width: 100%;
     padding: 1rem;
     display: flex;
+}
+
+.personaje__data__info {
+    padding: 0 3rem;
+    font-size: 1.5rem;
 }
 </style>

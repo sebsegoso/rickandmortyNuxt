@@ -1,5 +1,5 @@
 <template>
-<el-col :xs="12" :sm="8" :lg="6" class="wrapper">
+<el-col :xs="24" :sm="12" :md="24" :lg="6" class="wrapper">
     <nuxt-link :to="'/' + id">
         <el-card shadow="hover" class="card">
             <img :src="imagen" class="image" width="100%" />
@@ -24,7 +24,7 @@ export default {
 
 <style scoped>
 .wrapper {
-    padding: 20px;
+    padding: 1%;
 }
 
 .wrapper a {
@@ -33,7 +33,7 @@ export default {
 
 .card {
     transition: all .3s;
-    height: 100%;
+    min-height: 350px;
 }
 
 .card__body {

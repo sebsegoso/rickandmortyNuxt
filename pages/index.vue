@@ -4,7 +4,7 @@
         <el-row align="middle">
             <el-pagination class="pag" :hide-on-single-page="true" layout="prev, pager, next" :total="totalPaginas" @prev-click="prevPage" @next-click="nextPage" :current-page="pagina" @current-change="clickPagina">
             </el-pagination>
-            <Card v-for="personaje in personajes" :key="personaje.id" :id="personaje.id" :nombre="personaje.name" :imagen="personaje.image" />
+            <Card class="card__character" v-for="personaje in personajes" :key="personaje.id" :id="personaje.id" :nombre="personaje.name" :imagen="personaje.image" />
         </el-row>
     </transition>
 </el-container>
@@ -57,4 +57,7 @@ export default {
 </script>
 
 <style>
+.card__character {
+    min-height: 100%;
+}
 </style>
