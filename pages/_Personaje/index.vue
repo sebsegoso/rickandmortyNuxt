@@ -1,14 +1,15 @@
 <template>
-<div class="personaje-wrapper">
+<div class="personaje-wrapper" v-loading="loading" element-loading-text="Cargando..." element-loading-spinner="el-icon-loading" element-loading-background="#495057">
     <transition name="el-fade-in">
-        <Loading v-if="loading" />
-        <div v-else class="personaje-data">
-            <img :src="data.image" alt="" />
-            <h1>{{ data.id }} - {{ data.name }}</h1>
-            <hr />
-            <p>Species: {{ data.species }}</p>
-            <p>Gender: {{ data.gender }}</p>
-            <p>Origin: {{ data.origin.name }}</p>
+        <div class="personaje-data">
+            <img :src="data.image" alt="character image" class="personaje__data__img" />
+            <div class="personaje__data__info">
+                <h1>{{ data.id }} - {{ data.name }}</h1>
+                <hr />
+                <p>Species: {{ data.species }}</p>
+                <p>Gender: {{ data.gender }}</p>
+                <p>Origin: {{ data.origin.name }}</p>
+            </div>
         </div>
     </transition>
 </div>
@@ -58,7 +59,7 @@ export default {
 
 <style>
 .personaje-wrapper {
-    max-width: 100vw;
+    width: 100%;
     min-height: 100vh;
     padding: 3rem;
 }
@@ -67,5 +68,6 @@ export default {
     border: 2px solid whitesmoke;
     width: 100%;
     padding: 1rem;
+    display: flex;
 }
 </style>
