@@ -55,9 +55,3 @@ export default {
     },
 };
 </script>
-
-<style>
-.card__character {
-    min-height: 100%;
-}
-</style>
