@@ -1,5 +1,5 @@
 <template>
-<el-col :xs="24" :sm="12" :md="24" :lg="6" class="wrapper">
+<el-col :xs="24" :sm="12" :md="8" :lg="6" class="wrapper">
     <nuxt-link :to="'/' + id">
         <el-card shadow="hover" class="card">
             <img :src="imagen" class="image" width="100%" />
